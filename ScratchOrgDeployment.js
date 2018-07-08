@@ -3,7 +3,7 @@ var graphConfig = new GitGraph.Template({
   branch: {
     color: "#000000",
     lineWidth: 3,
-    spacingX: 60,
+    spacingX: 30,
     mergeStyle: "straight",
     showLabel: true, // display branch names on graph
     labelFont: "normal 10pt Arial",
@@ -68,17 +68,19 @@ var master = gitgraph.branch({
   column: masterCol
 });
 
+master.commit().commit();
+
 var develop = gitgraph.branch({
   parentBranch: master,
   name: "develop",
   column: developCol
 });
 
+develop.commit().commit();
+develop.merge(master)
+
 var scratch_org_deployment = gitgraph.branch({
   parentBranch: develop,
   name: "scratch-org-deployment",
   column: scratchOrgCol
 })
-
-master.commit().commit();
-develop.commit();
